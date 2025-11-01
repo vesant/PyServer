@@ -57,13 +57,6 @@ PyServer Manager is an interactive Python CLI that lets you start and stop the s
    - `description` *(optional)*: Extra info shown in the menu.
    - `env` *(optional)*: Environment variable overrides.
 
-3. Run the manager:
-
-   ```powershell
-   python -m pyserver_manager.app
-   ```
-
-   Use arrow keys? No—just type the option number and press Enter. `Ctrl+C` stops the active command without killing the manager.
 
 ## Reloading configuration
 
