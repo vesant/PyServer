@@ -20,6 +20,7 @@ class CommandRunner:
         working_dir = app.resolved_working_dir(self.project_root)
         env = self._build_environment(app.environment)
 
+        os.system("cls" if os.name == "nt" else "clear")
         print(f"→ Starting '{app.name}' in {working_dir}...")
         print("→ Press Ctrl+C to stop the command and return to the menu.\n")
 

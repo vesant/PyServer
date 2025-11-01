@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Iterable, List
+import os
 
 from .config import AppDefinition
 
@@ -16,16 +17,29 @@ def prompt_action(apps: Iterable[AppDefinition]) -> AppDefinition | str:
 
     app_list: List[AppDefinition] = list(apps)
 
-    print(MENU_SEPARATOR)
-    print("PyServer Manager")
-    print(MENU_SEPARATOR)
-    for index, app in enumerate(app_list, start=1):
-        details = f" - {app.description}" if app.description else ""
-        print(f"{index}. {app.name}{details}")
+    def clear_screen() -> None:
+        """Clear the terminal screen in a cross-platform way."""
+        # Windows uses 'cls', Unix-like systems use 'clear'
+        os.system("cls" if os.name == "nt" else "clear")
+
     aux_offset = len(app_list) + 1
-    print(f"{aux_offset}. Reload configuration")
-    print(f"{aux_offset + 1}. Exit")
-    print(MENU_SEPARATOR)
+    reload_idx = aux_offset
+    clear_idx = aux_offset + 1
+    exit_idx = aux_offset + 2
+
+    def print_menu() -> None:
+        print(MENU_SEPARATOR)
+        print("PyServer Manager")
+        print(MENU_SEPARATOR)
+        for index, app in enumerate(app_list, start=1):
+            details = f" - {app.description}" if app.description else ""
+            print(f"{index}. {app.name}{details}")
+        print(f"{reload_idx}. Reload configuration")
+        print(f"{clear_idx}. Clear screen")
+        print(f"{exit_idx}. Exit")
+        print(MENU_SEPARATOR)
+
+    print_menu()
 
     while True:
         try:
@@ -37,9 +51,13 @@ def prompt_action(apps: Iterable[AppDefinition]) -> AppDefinition | str:
 
         if 1 <= choice <= len(app_list):
             return app_list[choice - 1]
-        if choice == aux_offset:
+        if choice == reload_idx:
             return "reload"
-        if choice == aux_offset + 1:
+        if choice == clear_idx:
+            clear_screen()
+            print_menu()
+            continue
+        if choice == exit_idx:
             return "exit"
 
         print("Choice out of range. Try again.")
