@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/pyserver_manager/__init__.py
+src/pyserver_manager/app.py
+src/pyserver_manager/config.py
+src/pyserver_manager/menu.py
+src/pyserver_manager/runner.py
+src/pyserver_manager.egg-info/PKG-INFO
+src/pyserver_manager.egg-info/SOURCES.txt
+src/pyserver_manager.egg-info/dependency_links.txt
+src/pyserver_manager.egg-info/requires.txt
+src/pyserver_manager.egg-info/top_level.txt
+tests/test_config.py

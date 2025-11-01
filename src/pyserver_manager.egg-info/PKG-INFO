@@ -1,3 +1,16 @@
+Metadata-Version: 2.4
+Name: pyserver-manager
+Version: 0.1.0
+Summary: Interactive CLI to orchestrate lab applications
+Author: Your Name
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyyaml>=6.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+Dynamic: license-file
+
 # PyServer Manager
 
 PyServer Manager is an interactive Python CLI that lets you start and stop the services that live in this repository without leaving a single terminal window. It reads a YAML configuration that lists your lab apps and their commands (for example `npm run start:linux`) and runs them in-place, streaming the output directly inside the manager.
@@ -86,31 +99,3 @@ python -m pyserver_manager.app --config /path/to/another/apps.yaml
 
 - Add additional management commands (e.g., status checks, logs)
 - Integrate health probes or service discovery if your lab grows
-
-## Launcher script
-
-A small cross-platform launcher `run.py` is included at the project root. It simplifies running the manager by selecting the repository virtual environment (if present) and invoking the package entry point.
-
-Features:
-- Auto-detects common venv folders in the repo root: `.venv`, `venv`, `env`.
-- Picks the correct Python executable for the platform (Windows uses `Scripts\python.exe`, Unix uses `bin/python`).
-- Falls back to the current interpreter if no virtualenv is found.
-- Supports `--dry-run` (prints the chosen python and command without running) and `--config` to forward a custom `apps.yaml` path.
-
-Examples (PowerShell):
-
-```powershell
-# Dry-run to see the selected python and command
-python run.py --dry-run
-
-# Start the manager (run.py will pick the repo venv if available)
-python run.py
-
-# Start with a custom config file
-python run.py --config D:\path\to\apps.yaml
-
-# Forward extra args to the manager after `--`
-python run.py -- --some-manager-flag value
-```
-
-The launcher is optional — you can still run the manager directly with `python -m pyserver_manager.app` or install the package (`pip install -e .`) so the package is importable in your environment.
