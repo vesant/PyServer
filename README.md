@@ -62,14 +62,6 @@ PyServer Manager is an interactive Python CLI that lets you start and stop the s
 
 Choose **Reload configuration** in the menu to re-read `apps.yaml` after making changes. If the new config has an error, the previous one stays active.
 
-## Custom config path
-
-You can point to another configuration file:
-
-```powershell
-python -m pyserver_manager.app --config /path/to/another/apps.yaml
-```
-
 ## Requirements
 
 - Python 3.11+
