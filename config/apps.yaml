@@ -1,0 +1,13 @@
+# List the applications you want the manager to control.
+# Each entry must include a name, command, and the working directory (relative to this file).
+apps:
+  - name: dashboard
+    description: Next.js dashboard running on Linux
+    command: npm run start:linux
+    cwd: apps/dashboard
+    env:
+      NODE_ENV: development
+  - name: worker
+    description: Background Python worker
+    command: python main.py
+    cwd: apps/worker
