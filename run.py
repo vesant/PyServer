@@ -79,13 +79,22 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     cmd = build_command(python_to_use, forward)
 
+    # Ensure the child process can import the package in `src/` by setting PYTHONPATH.
+    env = os.environ.copy()
+    src_path = str(project_root / "src")
+    if env.get("PYTHONPATH"):
+        env["PYTHONPATH"] = src_path + os.pathsep + env["PYTHONPATH"]
+    else:
+        env["PYTHONPATH"] = src_path
+
     if args.dry_run or args.check:
         print("Selected python:", python_to_use)
         print("Command:", " ".join(cmd))
+        print("PYTHONPATH:", env.get("PYTHONPATH"))
         return 0
 
     try:
-        return subprocess.call(cmd)
+        return subprocess.call(cmd, env=env)
     except KeyboardInterrupt:
         return 130
 
