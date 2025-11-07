@@ -2,7 +2,7 @@
 # Each entry must include a name, command, and the working directory (relative to this file).
 apps:
   - name: debug-pingGoogle
-    description: Debug tool to test ping on Google (Windows)
+    description: Debug tool to test ping on Google
     command: pingGoogle.bat
     cwd: apps/debugTools
     env:
